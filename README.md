@@ -1,6 +1,6 @@
 ## 开发
 
-
+```bash
 // 安装依赖
 npm install
 
