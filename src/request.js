@@ -5,7 +5,7 @@ import { getToken } from './utils/cookie'
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // api 的 base_url
-  timeout: 120000 // 请求超时时间
+  timeout: 12000 // 请求超时时间
 })
 
 // request拦截器设置
@@ -40,8 +40,24 @@ service.interceptors.response.use(
     }
   },
   error => {
-    const code = error.response.data.status
-    if (!code) {
+    const response = error.response
+    const code = response.data.status
+    if (response.config.ss == 1) {
+      Message({
+        type: 'error',
+        message: '账户密码错误'
+      })
+    } else if (response.config.ss == 2) {
+      Message({
+        type: 'error',
+        message: '用户名错误'
+      })
+    } else if (response.config.ss == 3) {
+      Message({
+        type: 'error',
+        message: '密码错误'
+      })
+    } else if (!code) {
       Message({
         type: 'error',
         message: '接口请求失败'

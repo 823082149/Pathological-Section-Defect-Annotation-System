@@ -1,5 +1,5 @@
 <template>
-  <!-- <div class="home-wrapper">
+  <div class="home-wrapper">
     <div class="date-row">
       <div v-for="(item, index) in cardInfoData" :key="index" class="data-col">
         <el-card shadow="always" :body-style="{padding: '0px'}">
@@ -48,7 +48,7 @@
         </el-card>
       </el-col>
     </el-row>
-  </div> -->
+  </div>
 </template>
 
 <script>

@@ -2,6 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Layout from '../layout'
 import { asyncRoutes } from './routes'
+import { userRoutes } from './userRoutes'
+import { annotaterRoutes } from './annotaterRoutes'
+import { checkerRoutes } from './checkerRoutes'
+import { adminRoutes } from './adminRoutes'
 
 Vue.use(Router)
 
@@ -13,6 +17,8 @@ Vue.use(Router)
     fixed: true                  如果设置为 true，该项 tag 将一直存在 tag 栏中(默认为 false)
   }
  * */
+
+
 
 export const constantRoutes = [{
         path: '/login',
@@ -71,10 +77,30 @@ export const constantRoutes = [{
                 title: '个人中心'
             }
         }]
-    }
+    },
 ]
 
+const role = ''
+// const role = 'user'
+// const role = 'annotater'
+// const role = 'checker'
+// const role = 'admin'
+
 const routes = [...constantRoutes, ...asyncRoutes]
+// const routes = [...constantRoutes]
+
+
+if (role == 'user') {
+    routes.push(...userRoutes)
+} else if (role == 'annotater') {
+    routes.push(...annotaterRoutes)
+} else if (role == 'checker') {
+    routes.push(...checkerRoutes)
+} else if (role == 'admin') {
+    routes.push(...adminRoutes)
+} else {
+    
+}
 
 export default new Router({
     routes

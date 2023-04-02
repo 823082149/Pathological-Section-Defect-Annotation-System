@@ -38,8 +38,8 @@ export default {
     return {
       Background,
       loginForm: {
-        username: 'admin',
-        password: 'admin123',
+        username: '',
+        password: '',
         rememberMe: true
       },
       loginRules: {

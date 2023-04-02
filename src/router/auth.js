@@ -3,8 +3,11 @@ import { getToken } from '../utils/cookie'
 
 // 白名单列表
 const whiteList = ['/login']
+const role = 'admin'
 
 router.beforeEach((to, from, next) => {
+
+  // console.log(getToken())
   if (getToken()) {
     // 已登录且要跳转的是登录页
     if (to.path === '/login') {
