@@ -12,8 +12,10 @@
 </template>
 
 <script>
+
 import Avatar from '../../assets/img/avatar.png'
 import { removeToken } from '@/utils/cookie'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   name: 'UserAvatar',
@@ -23,6 +25,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['addVisitedView', 'delVisitedView', 'delAllVisitedView', 'delOthersVisitedView']),
     handleCommand(command) {
       if (command === 'userCenter') {
         this.$router.push({ path: '/user-center' })
@@ -38,7 +41,9 @@ export default {
         type: 'warning'
       }).then(() => {
         removeToken()
-        location.reload()
+        localStorage.clear()
+        this.delAllVisitedView()
+        this.$router.push({path: "/login"});
       })
     }
   }
@@ -47,7 +52,7 @@ export default {
 
 <style lang="less">
 .user-avatar-wrapper {
-  float: left;
+  float: right;
   width: 48px;
   padding: 3px 0 3px 20px;
   margin-left: 20px;

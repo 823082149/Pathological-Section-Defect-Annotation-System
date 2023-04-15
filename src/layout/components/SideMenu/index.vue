@@ -23,6 +23,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import SideMenuItem from './SideMenuItem'
+import {getMenus} from '../../../router/index'
 
 export default {
   name: 'SideMenu',
@@ -30,7 +31,8 @@ export default {
   computed: {
     ...mapGetters('app', ['collapsed']),
     routes() {
-      return this.$router.options.routes
+      // console.log(this.$router.options,);
+      return getMenus()
     },
     activeMenu() {
       const route = this.$route

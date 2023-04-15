@@ -1,4 +1,4 @@
-import Layout from '../layout'
+import Layout from '../layout/index.vue'
 
 
 export const adminRoutes = [
@@ -10,17 +10,18 @@ export const adminRoutes = [
         component: Layout,
         redirect: '/form-table/table-classic',
         meta: {
-            title: '切片管理',
+            // title: '切片管理',
             icon: 'vue-dsn-icon-biaoge',
             roles: ['admin']
         },
         children: [{
-            path: 'table-inline-edit',
-            name: 'TableInlineEdit',
+            path: 'Admin_ImageManage',
+            name: 'Admin_ImageManage',
             component: () =>
-                import ('../views/form-table/TableInlineEdit'),
+                import ('../views/form-table/Admin_ImageManage.vue'),
             meta: {
-                title: '切片管理'
+                title: '切片管理',
+                roles: ['admin']
             }
         }]
     },
@@ -31,17 +32,18 @@ export const adminRoutes = [
         component: Layout,
         redirect: '/form-table/table-classic',
         meta: {
-            title: '标注结果管理',
+            // title: '标注结果管理',
             icon: 'vue-dsn-icon-biaoge',
             roles: ['admin']
         },
         children: [{
-            path: 'table-inline-edit',
-            name: 'TableInlineEdit',
+            path: 'Admin_AnnotationManage',
+            name: 'Admin_AnnotationManage',
             component: () =>
-                import ('../views/form-table/TableInlineEdit'),
+                import ('../views/form-table/Admin_AnnotationManage.vue'),
             meta: {
-                title: '标注结果管理'
+                title: '标注结果管理',
+                roles: ['admin']
             }
         }]
     },
@@ -52,17 +54,18 @@ export const adminRoutes = [
         component: Layout,
         redirect: '/form-table/table-classic',
         meta: {
-            title: '人员管理',
+            // title: '人员管理',
             icon: 'vue-dsn-icon-biaoge',
             roles: ['admin']
         },
         children: [{
-            path: 'table-inline-edit',
-            name: 'TableInlineEdit',
+            path: 'Admin_UserManage',
+            name: 'Admin_UserManage',
             component: () =>
-                import ('../views/form-table/TableInlineEdit'),
+                import ('../views/form-table/Admin_UserManage.vue'),
             meta: {
-                title: '人员管理'
+                title: '人员管理',
+                roles: ['admin']
             }
         }]
     },

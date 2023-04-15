@@ -1,4 +1,4 @@
-import Layout from '../layout'
+import Layout from '../layout/index.vue'
 
 
 export const checkerRoutes = [
@@ -10,17 +10,18 @@ export const checkerRoutes = [
         component: Layout,
         redirect: '/form-table/table-classic',
         meta: {
-            title: '审核',
+            // title: '审核',
             icon: 'vue-dsn-icon-biaoge',
-            roles: ['user']
+            roles: ['checker']
         },
         children: [{
-            path: 'table-inline-edit',
-            name: 'TableInlineEdit',
+            path: 'Checker_Check',
+            name: 'Checker_Check',
             component: () =>
-                import ('../views/form-table/TableInlineEdit'),
+                import ('../views/form-table/Checker_Check.vue'),
             meta: {
-                title: '审核'
+                title: '审核',
+                roles: ['checker']
             }
         }]
     },
@@ -31,17 +32,18 @@ export const checkerRoutes = [
         component: Layout,
         redirect: '/form-table/table-classic',
         meta: {
-            title: '审核记录',
+            // title: '审核记录',
             icon: 'vue-dsn-icon-biaoge',
-            roles: ['user']
+            roles: ['checker']
         },
         children: [{
-            path: 'table-inline-edit',
-            name: 'TableInlineEdit',
+            path: 'Checker_CheckRecode',
+            name: 'Checker_CheckRecode',
             component: () =>
-                import ('../views/form-table/TableInlineEdit'),
+                import ('../views/form-table/Checker_CheckRecode.vue'),
             meta: {
-                title: '审核记录'
+                title: '审核记录',
+                roles: ['checker']
             }
         }]
     },

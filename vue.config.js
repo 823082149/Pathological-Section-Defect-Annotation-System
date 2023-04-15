@@ -17,6 +17,7 @@ function resolve(dir) {
 
 module.exports = {
   publicPath: './', // 部署应用包时的基本 url
+  parallel: false,
   outputDir: 'dist', // build 构建文件目录
   assetsDir: 'static', // 静态资源目录
   lintOnSave: process.env.NODE_ENV === 'development', // 仅在开发模式下进行 eslint 检测代码
@@ -55,11 +56,11 @@ module.exports = {
         })
       )
       Object.assign(config, {
-        resolve: {
-          alias: {
-            '@': resolve('src')
-          }
-        },
+        // resolve: {
+        //   alias: {
+        //     '@': resolve('./src')
+        //   }
+        // },
         externals: {
           'vue': 'Vue',
           'vue-router': 'VueRouter',
@@ -103,5 +104,7 @@ module.exports = {
           config.optimization.runtimeChunk('single')
         }
       )
+      
+      config.resolve.alias.set("@",resolve("src"))
   }
 }

@@ -1,4 +1,4 @@
-import Layout from '../layout'
+import Layout from '../layout/index.vue'
 
 
 export const userRoutes = [
@@ -10,17 +10,18 @@ export const userRoutes = [
         component: Layout,
         redirect: '/form-table/table-classic',
         meta: {
-            title: '查看结果',
+            // title: '查看结果',
             icon: 'vue-dsn-icon-biaoge',
             roles: ['user']
         },
         children: [{
-            path: 'table-inline-edit',
-            name: 'TableInlineEdit',
+            path: 'User_ViewResults',
+            name: 'User_ViewResults',
             component: () =>
-                import ('../views/form-table/TableInlineEdit'),
+                import ('../views/form-table/User_ViewResults.vue'),
             meta: {
-                title: '查看结果'
+                title: '查看结果',
+                roles: ['user']
             }
         }]
     },
@@ -31,7 +32,7 @@ export const userRoutes = [
         component: Layout,
         redirect: '/tools/image-upload',
         meta: {
-            title: '上传图片',
+            // title: '上传图片',
             icon: 'vue-dsn-icon-zujian',
             roles: ['user']
         },
@@ -39,9 +40,10 @@ export const userRoutes = [
             path: 'image-upload',
             name: 'ImageUpload',
             component: () =>
-                import ('../views/tools/ImageUpload'),
+                import ('../views/tools/ImageUpload.vue'),
             meta: {
-                title: '上传图片'
+                title: '上传图片',
+                roles: ['user']
             }
         }, ]
     },

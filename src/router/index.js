@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Layout from '../layout'
-import { asyncRoutes } from './routes'
+import Layout from '../layout/index.vue'
 import { userRoutes } from './userRoutes'
 import { annotaterRoutes } from './annotaterRoutes'
 import { checkerRoutes } from './checkerRoutes'
@@ -18,31 +17,86 @@ Vue.use(Router)
   }
  * */
 
-
-
 export const constantRoutes = [{
         path: '/login',
         name: 'Login',
         component: () =>
-            import ('../views/Login'),
+            import ('../views/Login.vue'),
         hidden: true,
-        meta: { title: '登录' }
+        meta: { title: '登录',
+        roles: ['user','annotater','checker','admin']
+    }
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: () =>
+            import ('../views/Register.vue'),
+        hidden: true,
+        meta: { title: '注册',
+        roles: ['user','annotater','checker','admin']
+    }
+    },
+    {
+        path: '/annotation',
+        name: 'annotation',
+        component: () =>
+            import ('../views/annotation/annotation.vue'),
+        hidden: true,
+        meta: { title: '标注',
+        roles: ['user','annotater','checker','admin']
+    }
+    },
+    {
+        path: '/user_showannotation',
+        name: 'user_showannotation',
+        component: () =>
+            import ('../views/annotation/user_showannotation.vue'),
+        hidden: true,
+        meta: { title: '显示标注',
+        roles: ['user','annotater','checker','admin']
+     }
+    },
+    {
+        path: '/other_showannotation',
+        name: 'other_showannotation',
+        component: () =>
+            import ('../views/annotation/other_showannotation.vue'),
+        hidden: true,
+        meta: { title: '显示标注',
+        roles: ['user','annotater','checker','admin']
+     }
+    },
+    
+    {
+        path: '/checkannotation',
+        name: 'checkannotation',
+        component: () =>
+            import ('../views/annotation/checkannotation.vue'),
+        hidden: true,
+        meta: { title: '审核',
+        roles: ['user','annotater','checker','admin']
+    }
     },
     {
         path: '401',
         name: '401',
         component: () =>
-            import ('../views/error-page/401'),
+            import ('../views/error-page/401.vue'),
         hidden: true,
-        meta: { title: '401' }
+        meta: { title: '401',
+        roles: ['user','annotater','checker','admin']
+     }
     },
     {
         path: '404',
         name: '404',
         component: () =>
-            import ('../views/error-page/404'),
+            import ('../views/error-page/404.vue'),
         hidden: true,
-        meta: { title: '404' }
+        meta: { title: '404',
+        roles: ['user','annotater','checker','admin']
+    }
     },
     {
         path: '/',
@@ -53,11 +107,12 @@ export const constantRoutes = [{
             path: 'home',
             name: 'Home',
             component: () =>
-                import ('../views/Home'),
+                import ('../views/Home.vue'),
             meta: {
                 title: '首页',
                 icon: 'vue-dsn-icon-index',
-                fixed: true
+                fixed: true,
+                roles: ['user','annotater','checker','admin']
             }
         }]
     },
@@ -72,36 +127,63 @@ export const constantRoutes = [{
             path: 'user-center',
             name: 'UserCenter',
             component: () =>
-                import ('../views/UserCenter'),
+                import ('../views/UserCenter.vue'),
             meta: {
-                title: '个人中心'
+                title: '个人中心',
+                roles: ['user','annotater','checker','admin']
             }
         }]
     },
+
+
 ]
 
-const role = ''
+
+// const routes = [...constantRoutes, ...asyncRoutes]
+
+// // const role = ''
 // const role = 'user'
 // const role = 'annotater'
 // const role = 'checker'
-// const role = 'admin'
+// const role = 'admin' 
 
-const routes = [...constantRoutes, ...asyncRoutes]
-// const routes = [...constantRoutes]
+const routes = [...constantRoutes,...userRoutes,...annotaterRoutes,...checkerRoutes,...adminRoutes];
+// const routes = [...constantRoutes];
 
+export const getRole = () => localStorage.getItem("_role") || "user";
 
-if (role == 'user') {
-    routes.push(...userRoutes)
-} else if (role == 'annotater') {
-    routes.push(...annotaterRoutes)
-} else if (role == 'checker') {
-    routes.push(...checkerRoutes)
-} else if (role == 'admin') {
-    routes.push(...adminRoutes)
-} else {
-    
+export const getMenus = ()=> {
+    const role = getRole();
+    let menus = [...constantRoutes];
+    if (role == 'user') {
+        menus.push(...userRoutes)
+        routes.push(...userRoutes)
+    } else if (role == 'annotater') {
+        menus.push(...annotaterRoutes)
+        routes.push(...annotaterRoutes)
+    } else if (role == 'checker') {
+        menus.push(...checkerRoutes)
+        routes.push(...checkerRoutes)
+    } else if (role == 'admin') {
+        menus.push(...adminRoutes)
+        routes.push(...adminRoutes)
+    }
+    return menus;
 }
 
+// const role = getRole();
+// if (role == 'user') {
+//     routes.push(...userRoutes)
+// } else if (role == 'annotater') {
+//     routes.push(...annotaterRoutes)
+// } else if (role == 'checker') {
+//     routes.push(...checkerRoutes)
+// } else if (role == 'admin') {
+//     routes.push(...adminRoutes)
+// }
+
 export default new Router({
+    mode: 'hash',
     routes
 })
+

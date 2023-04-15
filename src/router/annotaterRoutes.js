@@ -1,4 +1,4 @@
-import Layout from '../layout'
+import Layout from '../layout/index.vue'
 
 
 export const annotaterRoutes = [
@@ -10,19 +10,22 @@ export const annotaterRoutes = [
         component: Layout,
         redirect: '/form-table/table-classic',
         meta: {
-            title: '标注',
+            // title: '标注',
             icon: 'vue-dsn-icon-biaoge',
-            roles: ['user']
+            roles: ['annotater']
         },
         children: [{
-            path: 'table-inline-edit',
-            name: 'TableInlineEdit',
+            path: 'Annotater_Annotate',
+            name: 'Annotater_Annotate',
             component: () =>
-                import ('../views/form-table/TableInlineEdit'),
+                import ('../views/form-table/Annotater_Annotate.vue'),
             meta: {
-                title: '标注'
-            }
-        }]
+                title: '标注',
+                roles: ['annotater']
+            },
+        }
+    ]
+            
     },
     //标注记录
     {
@@ -31,17 +34,18 @@ export const annotaterRoutes = [
         component: Layout,
         redirect: '/form-table/table-classic',
         meta: {
-            title: '标注记录',
+            // title: '标注记录',
             icon: 'vue-dsn-icon-biaoge',
-            roles: ['user']
+            roles: ['annotater']
         },
         children: [{
-            path: 'table-inline-edit2',
-            name: 'TableInlineEdit',
+            path: 'Annotater_AnnotationRecord',
+            name: 'Annotater_AnnotationRecord',
             component: () =>
-                import ('../views/form-table/TableInlineEdit'),
+                import ('../views/form-table/Annotater_AnnotationRecord.vue'),
             meta: {
-                title: '标注记录'
+                title: '标注记录',
+                roles: ['annotater']
             }
         }]
     },
